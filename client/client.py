@@ -5,7 +5,7 @@ URL_API = "http://127.0.0.1:5000/api/v1/pistas"
 
 async def ejecutar_pruebas():
     async with httpx.AsyncClient() as client:
-        print("🚀 INICIANDO CLIENTE AUTÓNOMO - MUNDO TENIS\n" + "-"*40)
+        print(" INICIANDO CLIENTE AUTÓNOMO - MUNDO TENIS\n" + "-"*40)
 
         print("1. Solicitando lista de todas las pistas...")
         try:
@@ -44,7 +44,7 @@ async def ejecutar_pruebas():
                 
                 if 'clima_externo' in detalle:
                     clima = detalle['clima_externo']
-                    print(f"☁️  DATOS EXTERNOS (Open-Meteo): Temp: {clima.get('temperatura')}, Viento: {clima.get('viento')}")
+                    print(f"DATOS EXTERNOS (Open-Meteo): Temp: {clima.get('temperatura')}, Viento: {clima.get('viento')}")
                 else:
                     print("⚠️  Advertencia: No se recibió información climática.")
             except Exception as e:

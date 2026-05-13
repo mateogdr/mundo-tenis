@@ -2,6 +2,7 @@ from database import db
 from models.usuarios import Usuario
 
 def seedUsuarios():
+# DEV ONLY — these are local development seed credentials, do not use in production
     usuarios = [
         {"username": "admin", "email": "admin@mundotenis.com", "password": "admin1234", "role": "admin"},
         {"username": "rfederer", "email": "rfederer@mundotenis.com", "password": "suiza_power", "role": "user"},

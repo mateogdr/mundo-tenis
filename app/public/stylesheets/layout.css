@@ -1,0 +1,117 @@
+html, body{
+    height: 100%;
+    margin: 0; 
+    font-family: 'IBM', serif !important;
+}
+
+@font-face {
+    font-family: 'IBM';
+    src: url("/fuentes/IBM.ttf") format('truetype');
+    font-weight: 200 800; 
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("/images/fondo.jpg");
+    background-size: cover;       
+    background-position: center;  
+    background-attachment: fixed; 
+    font-family: sans-serif;
+}
+
+nav {
+    display: flex;          
+    width: 100%; 
+    background-color: #2c3e5099; 
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #34495e;
+    align-items: stretch;
+    height: 60px;
+}
+
+.logo-nav {
+    height: 40px;     
+    width: auto;       
+    vertical-align: middle; 
+    transition: transform 0.2s; 
+}
+
+nav a {
+    flex: 1;
+    display: flex;
+    align-items: center;     
+    justify-content: center;  
+    border-right: 1px solid #34495e;
+
+    min-height: 60px; 
+    text-align: center;    
+    padding: 10px 20px;    
+    color: white;         
+    text-decoration: none !important; 
+    font-weight: bold;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+nav a:hover .logo-nav{
+    transform: scale(1.2);
+}
+
+footer {
+    margin-top: auto;      
+    width: 100%;
+    background-color: #2c3e5046;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+footer a {
+    color: #3a3d2e98;          
+    text-decoration: none;   
+    font-weight: bold;       
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease; 
+}
+
+footer a:hover {
+    color: rgb(94, 127, 168);           
+    border-bottom: 2px solid #ccff00; 
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 4px;
+}
+
+#titulo-principal {
+    font-size: 4rem;         
+    margin-top: 0px;
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-top: 40px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: #2c3e5099;
+    color: #1a472a;   
+}
+
+.flash.error {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 30px 110px;
+}
+
+.flash.success {
+    color: #fff;
+    background-color: #2ecc71;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 30px 110px;
+}

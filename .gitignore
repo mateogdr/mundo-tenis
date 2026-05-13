@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+instance/
+.flask_session/
+assets/images/
+assets/thumbnails/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.DS_Store
+*.log

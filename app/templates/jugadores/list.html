@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h3 id="titulo-tabla">Tus jugadores:</h3>
+
+<form method="get" action="{{ url_for('jugadores.list') }}" class="filter-form">
+    
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ request.args.get('nombre', '') }}">
+
+    <label>Activo:</label>
+    <select name="activo">
+        <option value="">Todos</option>
+        <option value="True" {% if request.args.get("activo") == "True" %}selected{% endif %}>Sí</option>
+        <option value="False" {% if request.args.get("activo") == "False" %}selected{% endif %}>No</option>
+    </select>
+    
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <tr>
+        <th> </th>
+        <th> Nacionalidad </th>
+        <th> Edad </th>
+        <th> Puntos </th>
+        <th> Activo </th>
+        <th> Acciones </th>
+    </tr>
+
+    {% for jugador in jugadores %}
+    <tr>
+        <th> 
+            <div style="display: flex; align-items: center; gap: 10px;">
+                {% if jugador.filename %}
+                    <img src="{{ url_for('serve_image', filename=jugador.filename) }}" 
+                        style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+                {% endif %}
+                <span>{{ jugador.nombre }}</span>
+            </div>
+        </th>
+        <td> {{ jugador.nacionalidad }} </td>
+        <td> {{ jugador.edad }} </td>
+        <td> {{ jugador.puntos }} </td>
+        <td> {{ "Sí" if jugador.activo else "No" }} </td>
+        <td>
+            <perfil><a href="{{ url_for('jugadores.show', id=jugador.id) }}">Perfil</a></perfil>
+            <a href="{{ url_for('jugadores.edit', id=jugador.id) }}" class="acciones">Update</a>
+            <form action="{{ url_for('jugadores.delete', id=jugador.id) }}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="acciones" onclick="return confirm('¿Seguro que quieres eliminar este jugador?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    
+    <tr class="fila-add">
+        <td width="1%" colspan="7">
+           <a href="{{ url_for('jugadores.new') }}" class="btn-add">Añadir jugador</a>
+        </td>
+    </tr>
+</table>
+
+<div style="margin-top: 10px; margin-bottom: 30px; text-align: center">
+    <a href="{{ url_for('tu_mundo') }}" class="btn-add" style="text-decoration: none; display: inline-block;">Volver a Tu Mundo</a>
+</div>
+
+
+<div style="text-align: center; margin-bottom: 3ch;">
+    {% if pagination.has_prev %}
+        <a href="{{ url_for('jugadores.list', page=pagination.prev_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Anterior</a>
+    {% endif %}
+
+    Página {{ pagination.page }} de {{ pagination.pages }}
+
+    {% if pagination.has_next %}
+        <a href="{{ url_for('jugadores.list', page=pagination.next_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Siguiente</a>
+    {% endif %}
+</div>
+
+{% endblock %}

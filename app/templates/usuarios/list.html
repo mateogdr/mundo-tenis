@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h3 id="titulo-tabla">Gestión de Usuarios:</h3>
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for usuario in usuarios %}
+    <tr>
+        <th>{{ usuario.username }}</th>
+        <td>{{ usuario.email }}</td>
+        <td>
+            <perfil><a href="{{ url_for('usuarios.show', usuario_id=usuario.id) }}">Perfil</a></perfil>
+            <a href="{{ url_for('usuarios.edit', usuario_id=usuario.id) }}" class="acciones">Update</a>
+            <form action="{{ url_for('usuarios.delete', usuario_id=usuario.id) }}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="acciones" onclick="return confirm('¿Eliminar al usuario {{ usuario.username }}?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    
+    <tr class="fila-add">
+        <td colspan="3">
+           <a href="{{ url_for('usuarios.new') }}" class="btn-add">Registrar nuevo usuario</a>
+        </td>
+    </tr>
+</table>
+
+<div style="margin-top: 10px; margin-bottom: 30px; text-align: center">
+    <a href="{{ url_for('tu_mundo') }}" class="btn-add" style="text-decoration: none; display: inline-block;">Volver a Tu Mundo</a>
+</div>
+
+<div style="text-align: center; margin-bottom: 3ch;">
+    {% if pagination.has_prev %}
+        <a href="{{ url_for('usuarios.list', page=pagination.prev_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Anterior</a>
+    {% endif %}
+
+    Página {{ pagination.page }} de {{ pagination.pages }}
+
+    {% if pagination.has_next %}
+        <a href="{{ url_for('usuarios.list', page=pagination.next_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Siguiente</a>
+    {% endif %}
+</div>
+
+{% endblock %}

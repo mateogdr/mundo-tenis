@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h2 id="jugadores">Añade un nuevo jugador</h2>
+
+<form action="{{ url_for('jugadores.create') }}" method="POST" enctype="multipart/form-data">
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" value="" placeholder="Ej: Jaume Munar" required/>
+    <label for="nacionalidad">Nacionalidad:</label>
+    <input type="text" id="nacionalidad" name="nacionalidad" value="" placeholder="Ej: España" required/>
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" name="edad" value="" placeholder="Ej: 28" required/>
+    <label for="puntos">Puntos:</label>
+    <input type="number" id="puntos" name="puntos" value="" placeholder="Ej: 2375" required/>
+
+    <label for="activo">Activo:</label>
+    <select id="activo" name="activo">
+        <option value="True">Si</option>
+        <option value="False">No</option>
+    </select>
+
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" value="" placeholder="Ej: Especialista en tierra batida formado en la Rafa Nadal Academy, destaca por su combatividad, solidez defensiva y gran resistencia física en intercambios largos." required/>
+
+    <label for="file">Foto del jugador (Máx 5MB):</label>
+    <input type="file" id="file" name="file" accept="image/*">
+
+    <input type="submit" value="Añadir jugador">
+</form>
+
+{% endblock %}

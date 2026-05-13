@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h2 id="pistas">Editar pista: {{ pista.nombre }}</h2>
+
+<form action="{{ url_for('pistas.update', id=pista.id) }}" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="_method" value="PUT">
+    
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" value="{{ pista.nombre }}" required/>
+    
+    <label for="superficie">Superficie:</label>
+    <select id="superficie" name="superficie">
+        <option value="Hierba" {% if pista.superficie == "Hierba" %}selected{% endif %}>Hierba</option>
+        <option value="Tierra batida" {% if pista.superficie == "Tierra batida" %}selected{% endif %}>Tierra batida</option>
+        <option value="Dura" {% if pista.superficie == "Dura" %}selected{% endif %}>Dura</option>
+    </select>
+    
+    <label for="pais">Pais:</label>
+    <input type="text" id="pais" name="pais" value="{{ pista.pais }}" required/>
+    
+    <label for="torneo">Torneo:</label>
+    <input type="text" id="torneo" name="torneo" value="{{ pista.torneo }}"/>
+
+    {% if pista.imagen %}
+    <div>
+        <p>Imagen actual:</p>
+        <img src="{{ url_for('download', filename=pista.imagen) }}" 
+             alt="Foto de {{ pista.nombre }}" 
+             style="max-width:200px; max-height:200px;">
+    </div>
+    <label for="file">Cambiar foto de la pista (Máx 5MB):</label>
+    <input type="file" id="file" name="file" accept="image/*">
+    {% else %}
+    <label for="file">Subir foto de la pista (Máx 5MB):</label>
+    <input type="file" id="file" name="file" accept="image/*">
+    {% endif %}
+    
+    <input type="submit" value="Guardar cambios">
+</form>
+
+{% endblock %}

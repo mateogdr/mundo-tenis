@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/home.css">
+
+<div style="text-align: center; margin: 50px;">
+    <h1 style="font-size: 4em; color: #d9534f;"">Error 404</h1>
+    <h2>Recurso no encontrado en repositorio</h2>
+    <p class="sobre">Esta página no existe.</p>
+    <div style="margin-top: 30px;">
+        <a href="{{ url_for('home') }}" class="btn-add" style="text-decoration: none;">Volver al inicio</a>
+    </div>
+</div>
+
+{% endblock %}

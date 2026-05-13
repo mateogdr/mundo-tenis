@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h2 id="pistas">Editar Usuario: {{ usuario.username }}</h2>
+
+<form action="{{ url_for('usuarios.update', usuario_id=usuario.id) }}" method="post">
+    <input type="hidden" name="_method" value="PUT">
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" value="{{ usuario.username }}" required/>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ usuario.email }}" required/>
+    
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" value="{{ usuario.password }}" required/>
+
+    <input type="submit" value="Guardar cambios">
+</form>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mundo Tenis</title>
+    <link rel="icon" type="image/x-icon" href="/icono.ico">
+    <link rel="stylesheet" href="/stylesheets/layout.css">
+</head>
+    
+<h1 id="titulo-principal">Mundo Tenis</h1>
+
+<nav>
+    <a href="{{ url_for('home') }}">
+        <img src="/icono.ico" class="logo-nav">   
+    </a>
+    <a href="{{ url_for('tu_mundo') }}">Tu Mundo</a>
+    <a href="{{ url_for('about') }}">Sobre Mundo Tenis</a>
+    {% if g.user %}
+        {% if g.user.role == 'admin' %}
+            <a href="{{ url_for('usuarios.list') }}">Gestionar Usuarios</a>
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Cerrar sesión ({{ g.user.username }})</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}" class="btn-acceder">Entrar / Registrarse</a>
+    {% endif %}
+</nav>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</body>
+
+<footer>
+    Creado por <a href="mailto:mateo.garridodelrio@alumnos.upm.es">Mateo Garrido</a>
+</footer>
+</html>

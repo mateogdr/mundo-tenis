@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<div class="jugadores">
+    <h2 id="titulo-tabla">Perfil del Usuario: {{ usuario.username }}</h2>
+
+    <table>
+        <tr>
+            <th colspan="2">Información de la cuenta</th>
+        </tr>
+        <tr>
+            <td><strong>ID de Socio</strong></td>
+            <td>#{{ usuario.id }}</td>
+        </tr>
+        <tr>
+            <td><strong>Username</strong></td>
+            <td>{{ usuario.username }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td>{{ usuario.email }}</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{{ url_for('usuarios.list') }}" class="btn-add" style="text-decoration: none; display: inline-block;">Volver a Usuarios</a>
+        <a href="{{ url_for('usuarios.edit', usuario_id=usuario.id) }}" class="btn-add" style="text-decoration: none; display: inline-block; background-color: #f0ad4e;">Editar Perfil</a>
+    </div>
+</div>
+
+{% endblock %}

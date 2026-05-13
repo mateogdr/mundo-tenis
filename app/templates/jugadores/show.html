@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<div class="jugadores">
+    <h2 id="titulo-tabla">{{ jugador.nombre }}</h2>
+
+    {% if jugador.filename %}
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ url_for('serve_image', filename=jugador.filename) }}" alt="Foto de {{ jugador.nombre }}" 
+             style="max-width: 300px; border-radius: 10px; border: 2px solid #2c3e50;">
+    </div>
+    {% endif %}
+    
+    <p class="sobre">
+        {{ jugador.descripcion }}
+    </p>
+
+    <table>
+        <tr>
+            <th colspan="2">Carrera</th>
+        </tr>
+        <tr>
+            <td><strong>Puntos ATP</strong></td>
+            <td>{{ jugador.puntos }}</td>
+        </tr>
+        <tr>
+            <td><strong>Edad</strong></td>
+            <td>{{ jugador.edad }}</td>
+        </tr>
+        <tr>
+            <td><strong>Nacionalidad</strong></td>
+            <td>{{ jugador.nacionalidad }}</td>
+        </tr>
+        <tr>
+            <td><strong>Activo</strong></td>
+            <td>{{ "Sí" if jugador.activo else "No" }}</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{{ url_for('jugadores.list') }}" class="btn-add" style="text-decoration: none; display: inline-block;">Volver a Tus Jugadores</a>
+    </div>
+</div>
+
+{% endblock %}

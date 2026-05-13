@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<div class="pistas">
+    <h2 id="titulo-tabla">{{ pista.nombre }}</h2>
+
+    {% if pista.filename %}
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ url_for('serve_image', filename=pista.filename) }}" alt="Foto de {{ pista.nombre }}" 
+             style="max-width: 300px; border-radius: 10px; border: 2px solid #2c3e50;">
+    </div>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th colspan="2">Información:</th>
+        </tr>
+        <tr>
+            <td><strong>Nombre</strong></td>
+            <td>{{ pista.nombre }}</td>
+        </tr>
+        <tr>
+            <td><strong>Superficie</strong></td>
+            <td>{{ pista.superficie }}</td>
+        </tr>
+        <tr>
+            <td><strong>Pais</strong></td>
+            <td>{{ pista.pais }}</td>
+        </tr>
+        <tr>
+            <td><strong>Torneo</strong></td>
+            <td>{{ pista.torneo }}</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{{ url_for('pistas.list') }}" class="btn-add" style="text-decoration: none; display: inline-block; margin-bottom: 1cm;">Volver a Tus pistas</a>
+    </div>
+</div>  
+
+{% endblock %}

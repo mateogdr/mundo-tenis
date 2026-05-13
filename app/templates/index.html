@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/home.css">
+
+<p class="sobre">
+        Donde la nostalgia del tenis se encuentra con tu pasión. Descubre fotos históricas y lleva el registro de tus hitos personales en el circuito.
+</p>
+
+<div id="galeria-pricipal" class="galeria-tenis">
+    <div class="imagen-container">
+        <img src="/images/8253_Foto.1689578454.jpg" alt="Wimbledon">
+        <span class="texto">Alcaraz - Djokovic <br>
+            Wimbledon 2023
+        </span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/b_rafa_roger_2008_GettyImages-81837568.jpg" alt="Wimbledon">
+        <span class="texto">Nadal - Federer <br>
+            Wimbledon 2008</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="{{ url_for('static', filename='images/wimbledon2008.jpg') }}" alt="Wimbledon">
+        <span class="texto">Nadal - Federer <br>
+            Wimbledon 2008</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/3300983-67499928-2560-1440.jpg" alt="Australian Open">
+        <span class="texto">Nadal - Medvedev<br>
+            Australian Open 2022</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/7509_Foto.1662971732.jpg" alt="US Open">
+        <span class="texto">Alcaraz - Ruud<br>
+            US Open 2022</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/oroolimpiadas.jpg" alt="JJOO">
+        <span class="texto">Djokovic - Alcaraz<br>
+            JJOO 2024</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/rg2025.jpg" alt="Roland Garros">
+        <span class="texto">Alcaraz - Sinner<br>
+            Roland Garros 2025</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/rg2022.jfif" alt="Roland Garros">
+        <span class="texto">Nadal - Ruud<br>
+            Roland Garros 2022</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/aus 2012.jfif" alt="Australian Open">
+        <span class="texto">Nadal - Djokovic<br>
+            Australian Open 2012</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/rg2005.jfif" alt="Roland Garros">
+        <span class="texto">Nadal - Puerta<br>
+            Roland Garros 2005</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/5fa91b873456c.jpeg" alt="Roland Garros">
+        <span class="texto">Ferrero - Verkerk<br>
+            Roland Garros 2003</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/cincinati2023.avif" alt="Cincinnati Master">
+        <span class="texto">Djokovic - Alcaraz<br>
+            Cincinnati Open 2023</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/madrid2022.jfif" alt="Madrid Open">
+        <span class="texto">Alcaraz - Zverev<br>
+            Madrid Open 2022</span>
+    </div>
+
+    <div class="imagen-container">
+        <img src="/images/wb2011.jpg" alt="Wimbledon">
+        <span class="texto">Nadal - Djokovic<br>
+            Wimbledon 2011</span>
+        </div>
+
+    <div class="imagen-container">
+        <img src="/images/us2016.jpg" alt="US Open">
+        <span class="texto">Wawrinka - Djokovic<br>
+            US Open 2016</span>
+    </div>
+
+    <div class="imagen-container">
+            <img src="/images/mahut.avif" alt="Wimbledon">
+            <span class="texto">Isner - Mahut<br>
+                Wimbledon 2010</span>
+    </div>
+</div>
+
+{% endblock %}

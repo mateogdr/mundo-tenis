@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h2 id="pistas">
+    Añade una nueva pista
+</h2>
+<form action="{{ url_for('pistas.create') }}" method="POST" enctype="multipart/form-data">
+    
+    <label for="nombre">Nombre pista:</label>
+    <input type="text" id="nombre" name="nombre" value="" placeholder="Ej: Rod Laver Arena" required/>
+    
+    <label for="Superficie">Superficie:</label>
+    <select id="superficie" name="superficie" required>
+        <option value="Dura">Dura</option>
+        <option value="Hierba">Hierba</option>
+        <option value="Tierra batida">Tierra batida</option>
+    </select>
+    
+    <label for="pais">País:</label>
+    <input type="text" id="pais" name="pais" value="" placeholder="Ej: Australia" required/>
+    
+    <label for="torneo">Torneo:</label>
+    <input type="text" id="torneo" name="torneo" value="" placeholder="Ej: Australian Open" required/>
+    
+    <label for="file">Foto de la pista (Máx 5MB):</label>
+    <input type="file" id="file" name="file" accept="image/*">
+    
+    <input type="submit" value="Añadir pista">
+</form>
+
+{% endblock %}

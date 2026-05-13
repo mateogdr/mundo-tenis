@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: API Mundo Tenis
+  description: Servicio para gestionar jugadores, pistas y sus usuarios asociados.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Servidor local de desarrollo
+
+paths:
+  /jugadores/:
+    get:
+      summary: Obtiene la lista de todos los jugadores
+      tags:
+        - Jugadores
+      responses:
+        "200":
+          description: Lista de jugadores recuperada con éxito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Jugador"
+    post:
+      summary: Crea un nuevo jugador
+      tags:
+        - Jugadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NuevoJugador"
+      responses:
+        "201":
+          description: Jugador creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Jugador"
+
+  /pistas/:
+    get:
+      summary: Obtiene la lista de todas las pistas
+      tags:
+        - Pistas
+      responses:
+        "200":
+          description: Lista de pistas recuperada con éxito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pista"
+    post:
+      summary: Registra una nueva pista
+      tags:
+        - Pistas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NuevaPista"
+      responses:
+        "201":
+          description: Pista creada exitosamente.
+
+components:
+  schemas:
+    Jugador:
+      type: object
+      required: [id, nombre, nacionalidad, edad, puntos, descripcion, user_id]
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Carlos Alcaraz"
+        nacionalidad:
+          type: string
+          example: "Española"
+        edad:
+          type: integer
+          example: 20
+        puntos:
+          type: integer
+          example: 8500
+        activo:
+          type: boolean
+          example: true
+        descripcion:
+          type: string
+          example: "Jugador profesional de gran revés."
+        filename:
+          type: string
+          nullable: true
+          example: "jugador_01.jpg"
+        user_id:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+
+    NuevoJugador:
+      type: object
+      required: [nombre, nacionalidad, edad, puntos, descripcion, user_id]
+      properties:
+        nombre: {type: string}
+        nacionalidad: {type: string}
+        edad: {type: integer}
+        puntos: {type: integer}
+        descripcion: {type: string}
+        user_id: {type: string, format: uuid}
+
+    Pista:
+      type: object
+      required: [id, nombre, superficie, pais, torneo, user_id]
+      properties:
+        id:
+          type: integer
+          example: 10
+        nombre:
+          type: string
+          example: "Pista Central"
+        superficie:
+          type: string
+          example: "Tierra Batida"
+        pais:
+          type: string
+          example: "Francia"
+        torneo:
+          type: string
+          example: "Roland Garros"
+        filename:
+          type: string
+          nullable: true
+        user_id:
+          type: string
+          format: uuid
+
+    NuevaPista:
+      type: object
+      required: [nombre, superficie, pais, torneo, user_id]
+      properties:
+        nombre: {type: string}
+        superficie: {type: string}
+        pais: {type: string}
+        torneo: {type: string}
+        user_id: {type: string, format: uuid}

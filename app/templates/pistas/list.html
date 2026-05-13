@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<link rel="stylesheet" href="/stylesheets/mundo_tenis.css">
+
+<h3 id="titulo-tabla">Tus pistas:</h3>
+
+<form method="get" action="{{ url_for('pistas.list') }}" class="filter-form">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ request.args.get('nombre', '') }}">
+
+    <label>Superficie:</label>
+    <select name="superficie">
+        <option value="">Todas</option>
+        <option value="Hierba" {% if request.args.get('superficie') == 'Hierba' %}selected{% endif %}>Hierba</option>
+        <option value="Tierra batida" {% if request.args.get('superficie') == 'Tierra batida' %}selected{% endif %}>Tierra batida</option>
+        <option value="Dura" {% if request.args.get('superficie') == 'Dura' %}selected{% endif %}>Dura</option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <tr>
+        <th></th>
+        <th>Superficie</th>
+        <th>Pais</th>
+        <th>Torneo</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for pista in pistas %}
+    <tr>
+        
+        <th>
+            <div style="display: flex; align-items: center; gap: 10px;">
+            {% if pista.filename %}
+                <img src="{{ url_for('serve_image', filename=pista.filename) }}" 
+                    style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+            {% endif %}
+            <span>{{ pista.nombre }}</span>
+            </div>
+        </th>
+        <td>{{ pista.superficie }}</td>
+        <td>{{ pista.pais }}</td>
+        <td>{{ "Ninguno" if pista.torneo == "" else pista.torneo }}</td>
+        <td>
+            <perfil><a href="{{ url_for('pistas.show', id=pista.id) }}">Perfil</a></perfil>
+            <a href="{{ url_for('pistas.edit', id=pista.id) }}" class="acciones">Update</a>
+
+            <form action="{{ url_for('pistas.delete', id=pista.id) }}" method="post" style="display:inline;" class="delete">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="acciones" onclick="return confirm('¿Seguro que quieres eliminar esta pista?')">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+    <tr class="fila-add">
+        <td colspan="7">
+            <a href="{{ url_for('pistas.new') }}" class="btn-add">Añadir pista</a>
+        </td>
+    </tr>
+</table>
+
+<div style="margin-top: 10px; margin-bottom: 30px; text-align: center">
+    <a href="{{ url_for('tu_mundo') }}" class="btn-add" style="text-decoration: none; display: inline-block;">Volver a Tu Mundo</a>
+</div>
+
+<div style="text-align: center; margin-bottom: 3ch;">
+    {% if pagination.has_prev %}
+        <a href="{{ url_for('pistas.list', page=pagination.prev_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Anterior</a>
+    {% endif %}
+
+    Página {{ pagination.page }} de {{ pagination.pages }}
+
+    {% if pagination.has_next %}
+        <a href="{{ url_for('pistas.list', page=pagination.next_num) }}"
+        style="margin:4px; padding:6px 10px; border:1px solid #cccccc00; border-radius:5px; text-decoration:none;">Siguiente</a>
+    {% endif %}
+</div>
+
+{% endblock %}
